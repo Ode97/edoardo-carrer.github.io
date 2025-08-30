@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nanobot Wars – Project Detail</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      background: #fff;
+    }
+    h1, h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    p, ul {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    ul { padding-left: 1.2rem; }
+    img, video {
+      width: 100%;
+      max-height: 600px;
+      object-fit: cover;
+      margin: 1rem 0;
+      border-radius: 8px;
+    }
+    a {
+      color: #1e90ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover, a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    /* Carousel Styles */
+    .carousel {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .carousel-images img {
+      flex-shrink: 0;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .carousel-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+    }
+    .carousel-dots span {
+      height: 12px;
+      width: 12px;
+      margin: 0 4px;
+      background-color: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .carousel-dots .active {
+      background-color: rgba(255,255,255,0.9);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Nanobot Wars</h1>
+    <p><strong>Period:</strong> Nov 2021– Jen 2022</p>
+    <p><strong>Technologies:</strong> Unity, Photon Networking</p>
+
+    <h2>Vision Statement</h2>
+    <p>“Nanobot Wars” is a strategy simulation where players design and deploy swarms of nanobots to battle enemy creations in an arena, using element placement and upgrades to influence the outcome.</p>
+
+    <h2>Gameplay Synopsis</h2>
+    <ul>
+      <li><strong>Lab Customization:</strong> Select and configure your nanobot’s hardware (legs, sensors, weapons) and software behaviors before deployment.</li>
+      <li><strong>Pre-Battle Setup:</strong> Place energy sources, defensive walls, or traps on your side of the arena.</li>
+      <li><strong>Battle Phase:</strong> Reveal the full battlefield and watch a 45-second automated engagement where nanobots gather energy, replicate, and clash until one swarm prevails.</li>
+    </ul>
+
+    <h2>Game Modes</h2>
+    <p><strong>Single Player:</strong> Battle AI scientists to earn parts and master mechanics. Tutorial levels introduce core gameplay.<br>
+       <strong>VS Mode:</strong> Head-to-head online matches where both players configure their swarm and tools before automated battles.</p>
+
+    <div class="carousel" id="carousel-nanobot">
+      <div class="carousel-images" id="carousel-images-nanobot">
+        <img src="../assets/img/nanobot-warslab.png" alt="Lab customization screen" />
+        <img src="../assets/img/nanobotwars-prebattle.png" alt="Pre-battle setup screen" />
+        <img src="../assets/img/nanobotwars-battle.png" alt="Battle phase screenshot" />
+      </div>
+      <div class="carousel-dots" id="carousel-dots-nanobot"></div>
+    </div>
+
+    <h2>Resources</h2>
+    <a href="../assets/pdf/NanobotWars-GDD.pdf" target="_blank" rel="noopener noreferrer">Download GDD (PDF)</a></p>
+  
+    <p><a href="https://yourgame.itch.io/nanobot-wars" target="_blank" rel="noopener noreferrer">Play Nanobot Wars on itch.io</a></p>
+
+    <p><a href="../index.html">← Back</a></p>
+  </div>
+
+  <script>
+    (function () {
+      const imagesContainer = document.getElementById('carousel-images-nanobot');
+      const images = imagesContainer.querySelectorAll('img');
+      const dotsContainer = document.getElementById('carousel-dots-nanobot');
+      let current = 0;
+
+      function showSlide(index) {
+        current = (index + images.length) % images.length;
+        imagesContainer.style.transform = `translateX(-${current * 100}%)`;
+        updateDots();
+      }
+
+      function updateDots() {
+        dotsContainer.innerHTML = '';
+        images.forEach((_, i) => {
+          const dot = document.createElement('span');
+          dot.setAttribute('role', 'button');
+          dot.setAttribute('tabindex', '0');
+          dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+          dot.addEventListener('click', () => showSlide(i));
+          dot.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              showSlide(i);
+            }
+          });
+          if (i === current) dot.classList.add('active');
+          dotsContainer.appendChild(dot);
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        updateDots();
+        showSlide(0);
+      });
+    })();
+  </script>
+</body>
+</html>

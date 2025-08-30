@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visione Artificiale – Dettaglio Tecnico</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 8px;
+    }
+    h1, h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    h3 {
+      font-size: 1.4rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    p, ul {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    img, video {
+      width: 100%;
+      max-height: 600px;
+      object-fit: cover;
+      margin: 1rem 0;
+      border-radius: 8px;
+    }
+    code {
+      background: #f0f0f0;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    a {
+      color: #1e90ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover, a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Visione Artificiale</h1>
+    <p><strong>Tecnologie:</strong> Python, PyTorch, VGG16 pretrained, Stable Diffusion 1.4, GradCAM</p>
+
+    <h2>Obiettivo del Progetto</h2>
+    <p>Costruire e analizzare due classificatori binari per distinguere immagini reali da immagini sintetiche generate con Stable Diffusion 1.4, evidenziando le aree decisionali tramite GradCAM.</p>
+
+    <h2>Dataset</h2>
+    <p>Utilizzo del dataset CIFAKE: 60.000 immagini reali da CIFAR-10 (32×32 pixel, 10 classi) e 60.000 immagini sintetiche generate con prompt personalizzati per ogni classe.</p>
+
+    <h2>Modelli Scelti</h2>
+    <h3>Basic CNN</h3>
+    <ul>
+      <li>3 layer convoluzionali (8→16→32 filtri, kernel 3×3, padding=1), ciascuno seguito da ReLU e max pooling 2×2.</li>
+      <li>Flatten e layer lineare (512→1) con funzione di attivazione Sigmoid.</li>
+    </ul>
+
+    <h3>VGG16 Fine-tuned</h3>
+    <ul>
+      <li>Primi 15 layer di VGG16 pretrained su ImageNet, mantenuti per estrazione caratteristiche.</li>
+      <li>AdaptiveAvgPool2D (7×7), Flatten, Dropout(0.7), Linear(12544→1) + Sigmoid.</li>
+      <li>Ottimizzato con learning rate differenziati (0.0001 per feature extractor, 0.001 per classificatore).</li>
+    </ul>
+
+    <h2>Training e Valutazione</h2>
+    <p>Early stopping con patience=5 epoche. 10% del training set usato per validazione.</p>
+    <h3>Basic CNN</h3>
+    <ul>
+      <li>LR=0.001, batch size=256, epoche=50</li>
+      <li>Test accuracy: 92.81%, Zero-one loss: 7.19%</li>
+    </ul>
+    <h3>VGG16 Fine-tuned</h3>
+    <ul>
+      <li>LR extractor=0.0001, LR classifier=0.001, batch size=128, epoche=10</li>
+      <li>Test accuracy: 97.36%, Zero-one loss: 2.64%</li>
+    </ul>
+
+    <h2>Generazione Immagini Sintetiche</h2>
+    <p>Creazione di 200 immagini sintetiche (512×512 → 32×32) con Stable Diffusion 1.4 e prompt basati su class_label e modifiers.</p>
+    <ul>
+      <li>Basic CNN: accuracy su sintetiche 77.11%</li>
+      <li>VGG16: accuracy su sintetiche 92.04%</li>
+    </ul>
+
+    <h2>Analisi GradCAM</h2>
+    <p>Applicazione di GradCAM su layer intermedi (14×14) e finali (8×8) per identificare le regioni di interesse dei modelli.</p>
+    <p>Hook sui layer convoluzionali e backprop con target 1-prediction per classe fake.</p>
+
+    <h2>Esempi di Classificazione</h2>
+    <p>Analisi di immagini correttamente e erroneamente classificate da entrambi i modelli, mostrando differenze di focus tra contorni (CNN) e aree interne (VGG16).</p>
+
+    <h2>Considerazioni Finali</h2>
+    <p>Il modello VGG16 mostra robustezza superiore, in particolare sui falsi negativi. La limiata risoluzione (32×32) e la perdita di artefatti sintetici complicano la classificazione; GradCAM evidenzia la necessità di features di alto livello per riconoscere la sinteticità.</p>
+
+    <h2>Risorse</h2>
+    <p><a href="../assets/pdf/Relazione_VA_Carrer.pdf" target="_blank" rel="noopener noreferrer">Scarica il documento completo (PDF)</a></p>
+    <p><a href="../index.html">← Torna al Portfolio</a></p>
+  </div>
+</body>
+</html>

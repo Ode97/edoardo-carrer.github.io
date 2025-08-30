@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goal-Oriented AI – Dettaglio Tecnico</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      background: #fff;
+    }
+    h1, h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    h3 {
+      font-size: 1.4rem;
+      margin-top: 1.5rem;
+    }
+    img, video {
+      width: 100%;
+      max-height: 600px;
+      object-fit: cover;
+      margin: 1rem 0;
+      border-radius: 8px;
+    }
+    p, ul {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    code {
+      background: #f0f0f0;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    a {
+      color: #1e90ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover, a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Goal-Oriented Behavior in Unity – Dettaglio Tecnico</h1>
+    <p><strong>Piattaforme:</strong> Unity 2020+, C#</p>
+    <p><strong>Sistemi:</strong> Finite State Machine (FSM) + Goal Oriented Behavior (GOB)</p>
+
+    <h2>Introduzione</h2>
+    <p>Implementazione di un sistema GOB per NPC in un ambiente simulato "The Sims", con una famiglia di 3 agenti (due genitori e un bambino). Il framework unisce una FSM per il flusso di stati e un algoritmo GOB per la scelta emergente delle azioni basata su "discontentment".</p>
+
+    <h2>Descrizione Agenti</h2>
+    <h3>FSM</h3>
+    <ul>
+      <li><strong>Choose Action:</strong> Valuta candidati controllando risorse, strumenti e orario.</li>
+      <li><strong>Movement:</strong> Muove l'<code>NavMeshAgent</code> alla destinazione.</li>
+      <li><strong>Perform Action:</strong> Esegue e applica effetti su goal e risorse.</li>
+    </ul>
+    <h3>GOB</h3>
+    <p>Ogni azione viene simulata internamente modificando il valore di "discontentment" per ciascun goal. L’agente sceglie l’azione con impatto minimo sul discontentment totale.</p>
+
+    <h2>Script Interface</h2>
+    <h3>Classi Principali</h3>
+    <ul>
+      <li><code>Child</code>, <code>Parent</code>: componenti MonoBehaviour con riferimenti a <code>WorldModel</code> e altri agenti.</li>
+      <li><code>Goal</code>: definisce <code>Name</code>, <code>ChangePerHour</code>, <code>Insistence</code>, <code>BasicRate</code>, <code>isCritic</code>.</li>
+      <li><code>Action</code>: struttura con <code>Name</code>, <code>Duration</code>, <code>SuggestedTime</code>, <code>Destination</code>, <code>Effects</code>.</li>
+      <li><code>Effect</code>: impatta specifici goal con valore parametro <code>Value</code>.</li>
+      <li><code>Tool</code>: risorsa posizionata con <code>ToolType</code>, <code>ProbToBreak</code>, <code>InsistenceOnBreak</code>.</li>
+    </ul>
+
+    <h2>Interazione Runtime</h2>
+    <p>In-Game è possibile forzare eventi tramite UI per modificare:</p>
+    <ul>
+      <li>Rottura strumenti (simula guasto tool).</li>
+      <li>Aumenti di insistence: domestico (bladder), studio, lavoro, social.</li>
+    </ul>
+
+    <h2>Considerazioni Finali e Future Work</h2>
+    <p>Il sistema GOB è modulare e facilmente estendibile. Possibili miglioramenti:</p>
+    <ul>
+      <li>Introduzione di "Mood" per uno stato psicologico globale dell’agente.</li>
+      <li>Goal-Oriented Action Planning (GOAP) per sequenze predittive di azioni.</li>
+      <li>Aggiunta di dialoghi contestuali basati su <code>discontentment</code> e relazioni tra NPC.</li>
+      <li>Ottimizzazione pathfinding con precomputazione e A*.</li>
+    </ul>
+
+    <img src="../assets/img/ai-goap.png" alt="Interfaccia progetto GOB" loading="lazy">
+
+    <p><a href="../assets/file/Documentation-AIVG-Carrer.pdf">Documentazione progetto</a></p>
+
+    <p><a href="../index.html">← Torna al Portfolio</a></p>
+  </div>
+</body>
+</html>

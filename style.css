@@ -1,0 +1,386 @@
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+header {
+  background: #222;
+  color: #fff;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+header p {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+header img {
+  border-radius: 50%;
+  width: 120px;
+  margin-top: 1rem;
+}
+
+nav {
+  margin-top: 1rem;
+}
+
+nav a {
+  margin: 0 1rem;
+  color: #1e90ff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+a:focus {
+  outline: 2px solid #ff7f50;
+}
+
+nav a.active {
+  text-decoration: underline;
+  color: #ff7f50;
+}
+
+nav a:hover {
+  color: #ff7f50;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.carousel-images {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-images img {
+  flex-shrink: 0;
+  width: 100%;
+  max-height: 600px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+.carousel-dots span {
+  height: 12px;
+  width: 12px;
+  margin: 0 4px;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+}
+
+.carousel-dots .active {
+  background-color: rgba(255,255,255,0.9);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.single-carousel {
+  max-width: 900px;
+  margin: 1rem auto;
+}
+
+.single-carousel .carousel-images {
+  display: block;
+}
+
+.single-carousel .carousel-images img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  max-height: 500px;
+}
+
+.single-carousel .carousel-dots {
+  display: none; /* Maschera i pallini poiché inutile per una sola immagine */
+}
+
+
+.project-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.project-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.project-card h3 {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.project-card p {
+  font-size: 0.95rem;
+}
+
+.project-card a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  color: #1e90ff;
+  font-weight: bold;
+}
+
+.project-card a:hover {
+  color: #ff7f50;
+  text-decoration: underline;
+}
+
+footer {
+  background: #222;
+  color: #aaa;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}/* === Base Styles === */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+  color: #333;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* === Header === */
+header {
+  background: #222;
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+header p {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+nav a {
+  margin: 0 1rem;
+  color: #1e90ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* === Sections === */
+section {
+  padding: 2rem 1rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+section h2 {
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+
+/* === Carousel === */
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 900px; /* più grande di prima */
+  margin: 1rem auto;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000; /* migliora contrasto su immagini con sfondo trasparente */
+}
+
+.carousel-images {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-images img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover; /* meglio di contain per valorizzare le immagini */
+  max-height: 500px;
+  border-radius: 8px;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+.carousel-dots span {
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  margin: 0 4px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.carousel-dots .active {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* === Projects Grid === */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.project-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.project-card h3 {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.project-card p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.project-card a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  color: #1e90ff;
+  font-weight: bold;
+}
+
+/* === Contact Section === */
+#contact a {
+  color: #1e90ff;
+  text-decoration: none;
+}
+
+/* === Footer === */
+footer {
+  background: #222;
+  color: #aaa;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+/* === Media Queries === */
+
+/* 📱 Mobile */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .carousel {
+    max-width: 100%;
+  }
+
+  .carousel-images img {
+    aspect-ratio: 4 / 3;
+    max-height: 300px;
+    object-fit: cover;
+  }
+
+  .project-card img {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* 💻 Desktop */
+@media (min-width: 1024px) {
+  .carousel {
+    max-width: 1000px;
+  }
+
+  .carousel-images img {
+    aspect-ratio: 16 / 9;
+    max-height: 550px;
+  }
+
+  .project-card img {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+
+@media (max-width: 600px) {
+  header h1 { font-size: 2rem; }
+  header p { font-size: 1rem; }
+  .project-card img { height: 140px; }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muffin vs Chihuahua – Dettaglio Tecnico</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 8px;
+    }
+    h1, h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    h3 {
+      font-size: 1.4rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    p, ul {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    ul { padding-left: 1.2rem; }
+    a {
+      color: #1e90ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover, a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Muffin vs Chihuahua – Dettaglio Tecnico</h1>
+    <p><strong>Obiettivo:</strong> Analisi di quattro architetture di reti neurali per la classificazione binaria di immagini di muffin vs chihuahua, valutando l'impatto di iperparametri tramite cross-validation a 5 fold.fileciteturn8file0</p>
+
+    <h2>Dataset e Pre-Processing</h2>
+    <p>Dataset Kaggle "Muffin vs Chihuahua": 5917 immagini (3199 chihuahua, 2718 muffin).<br>
+    Pre-processamento:<br>
+    • Conversione in scala di grigi<br>
+    • Ridimensionamento a 64×64<br>
+    • Normalizzazione pixel in [0,1]</p>
+
+    <h2>Architetture Neural Network</h2>
+    <h3>Fully Connected NN</h3>
+    <ul>
+      <li>4 hidden layer: 1024 → 512 → 256 → 128 neuroni</li>
+      <li>ReLU + Dropout(0.1) su ogni hidden layer</li>
+      <li>Output layer: 1 neurone + Sigmoid</li>
+    </ul>
+
+    <h3>ConvNet (2 layer base)</h3>
+    <ul>
+      <li>Conv(3×3,16) + ReLU + MaxPool(2×2)</li>
+      <li>Conv(3×3,32) + ReLU + MaxPool(2×2)</li>
+      <li>Dense 128 + ReLU + Dropout(0.1) → Sigmoid</li>
+    </ul>
+
+    <h3>ConvNet (2 layer doubled filters)</h3>
+    <ul>
+      <li>Conv(3×3,32) + ReLU + MaxPool(2×2)</li>
+      <li>Conv(3×3,64) + ReLU + MaxPool(2×2)</li>
+      <li>Dense 128 + ReLU + Dropout(0.1) → Sigmoid</li>
+    </ul>
+
+    <h3>ConvNet (4 layer profonda)</h3>
+    <ul>
+      <li>Conv(3×3,16) → Conv(3×3,32) → Conv(3×3,64) → Conv(3×3,128), ciascuna + ReLU + MaxPool(2×2)</li>
+      <li>Dense 128 + ReLU + Dropout(0.1) → Sigmoid</li>
+    </ul>
+
+    <h2>Iperparametri di Allenamento</h2>
+    <p>Ottimizzatore: Adam<br>
+    Funzione di loss: Binary Cross-Entropy<br>
+    Batch size: 16, 64, 128<br>
+    Learning rate: 0.01, 0.001, 0.0001<br>
+    Early stopping: patience=5, metric=validation loss<br>
+    Epoch max: 100</p>
+
+    <h2>Cross-Validation</h2>
+    <p>5-fold StratifiedKFold per preservare la proporzione delle classi in ogni fold (trening/test ~4732 immagini per fold) per una stima robusta del rischio.</p>
+
+    <h2>Risultati Principali</h2>
+    <p>La rete Fully Connected ottiene il rischio peggiore (~0.28), mentre i modelli CNN si comportano meglio con rischio medio ~0.15–0.14. Il miglior risultato (risk=0.1423) è ottenuto dalla ConvNet 3 (4 layer) con batch=64 e lr=0.0001.</p>
+
+    <h2>Conclusioni Tecniche</h2>
+    <p>L'aumento di profondità non garantisce miglior performance senza un lr adeguato: la ConvNet 4-layer converge lentamente e tende a overfitting veloce con lr alta. Le architetture CNN semplici (2 layer) con filtri aumentati raggiungono un buon compromesso di accuratezza e stabilità.</p>
+
+    <h2>Risorse</h2>
+    <p><a href="../assets/pdf/SMFMLproject.pdf" target="_blank" rel="noopener noreferrer">Scarica la relazione completa (PDF)</a></p>
+    <p><a href="../index.html">← Torna al Portfolio</a></p>
+  </div>
+</body>
+</html>

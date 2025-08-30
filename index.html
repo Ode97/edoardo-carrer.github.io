@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edoardo Carrer - Technical Game Designer</title>
+  <meta name="description" content="Portfolio of Edoardo Carrer: game design projects, Unity development, AI and accessibility in video games.">
+  <meta property="og:title" content="Edoardo Carrer - Technical Game Designer" />
+  <meta property="og:description" content="Portfolio featuring game design, AI and accessibility projects." />
+  <meta property="og:image" content="assets/img/etherea.png" />
+  <meta property="og:url" content="https://tuodominio.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Edoardo Carrer</h1>
+    <p>Technical Game Designer & Developer</p>
+    <!-- Profile image (optional) -->
+    <nav aria-label="Main menu">
+      <a href="#projects">Projects</a>
+      <!-- Thesis link removed as it's included under Projects -->
+      <!-- <a href="#datascience">Data Science</a> --> <!-- Remove if unused -->
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Unified Projects section (includes thesis and other projects) -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <!-- Etherea project (Thesis) -->
+      <div class="project-card">
+        <h3>Etherea</h3>
+        <p>3D game developed in Unity as a thesis project, controlled exclusively via eye‑tracking and designed for users with severe disabilities. Includes physiological data analysis with Python to assess gameplay experience and level effectiveness.</p>
+        <p><strong>Technologies:</strong> Unity</p>
+        <div class="carousel">
+          <div class="carousel-images" id="carousel-images-thesis">
+            <img src="assets/img/etherea.png" alt="Etherea game screenshot">
+            <img src="assets/img/etherea-interaction.png" alt="User interaction in Etherea">
+            <img src="assets/img/etherea-health-screen.png" alt="Etherea health screen">
+            <img src="assets/img/etherea-dialogue.png" alt="Dialogue window in Etherea">
+            <img src="assets/img/etherea-first-person.png" alt="First‑person view in Etherea">
+          </div>
+          <div class="carousel-dots" id="carousel-dots-thesis"></div>
+        </div>
+        <p>
+          <a href="assets/file/TesiEdoardoCarrer.pdf" target="_blank" rel="noopener noreferrer">Download thesis (PDF)</a> | 
+          <a href="projects/etherea.html" target="_blank" rel="noopener noreferrer">Details</a>
+        </p>
+      </div>
+
+      <!-- Synth&Synners project -->
+      <div class="project-card">
+        <h3>Synth&amp;Synners</h3>
+        <p>Racing game built in Unity with Photon, designed for a targeted audience and focused on mechanic balancing and online multiplayer.</p>
+        <p><strong>Technologies:</strong> Unity, Python, Tobii Eye Tracker 5, Empatica Embrace Plus</p>
+        <div class="carousel single-carousel">
+          <div class="carousel-images">
+            <img src="assets/img/Screenshot_Gameplay.png" alt="Synth&amp;Synners gameplay screenshot">
+          </div>
+          <div class="carousel-dots"></div>
+        </div>
+        <p>
+          <a href="assets/file/DOC-GameDesignDocument-Synth&Sinners.pdf" target="_blank" rel="noopener noreferrer">Download GDD</a> |
+          <a href="projects/synthsinners.html" target="_blank" rel="noopener noreferrer">Details</a>
+        </p>
+      </div>
+
+      <!-- Nanobot Wars project -->
+      <div class="project-card">
+        <h3>Nanobot Wars</h3>
+        <p>Real‑time strategy game developed in Unity with Photon online support, emphasizing AI behavior and PvP mechanics.</p>
+        <p><strong>Technologies:</strong> Unity, Photon</p>
+        <div class="carousel">
+          <div class="carousel-images" id="carousel-images-nanobot">
+            <img src="assets/img/nanobot-warslab.png" alt="Nanobot Wars screenshot">          
+            <img src="assets/img/nanobotwars-prebattle.png" alt="Nanobot Wars pre‑battle screenshot">
+            <img src="assets/img/nanobotwars-battle.png" alt="Nanobot Wars battle screenshot">
+          </div>
+          <div class="carousel-dots" id="carousel-dots-nanobot"></div>
+        </div>       
+        <p>
+          <a href="assets/file/GameDesignDocument-NanobotWars.pdf" target="_blank" rel="noopener noreferrer">Download GDD</a> |
+          <a href="projects/nanobotwars.html" target="_blank" rel="noopener noreferrer">Details</a>
+        </p>
+      </div>
+      
+    </section>
+    
+    <!-- (Optional: Data Science section removed or hidden)
+    <section id="datascience">
+      ... any data science projects ...
+    </section>
+    -->
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <p>Have an interesting game design project or position? Get in touch!</p>
+      <p>Email: <a href="mailto:edo.carrer@gmail.com">edo.carrer@gmail.com</a></p>
+      <p>
+        <a href="assets/file/CV_Edoardo_Carrer.pdf" target="_blank">Download my CV</a> • 
+        <a href="https://www.linkedin.com/in/edoardo-carrer-441734162/" target="_blank">LinkedIn</a> • 
+        <a href="https://github.com/Ode97" target="_blank">GitHub</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Edoardo Carrer</p>
+  </footer>
+
+  <script>
+    const containers = [
+      { imagesId: 'carousel-images-thesis', dotsId: 'carousel-dots-thesis' },
+      { imagesId: 'carousel-images-nanobot', dotsId: 'carousel-dots-nanobot' }
+    ];
+
+    containers.forEach(({ imagesId, dotsId }) => {
+      const imagesContainer = document.getElementById(imagesId);
+      const images = imagesContainer.querySelectorAll('img');
+      const dotsContainer = document.getElementById(dotsId);
+      let current = 0;
+
+      function showSlide(index) {
+        current = (index + images.length) % images.length;
+        imagesContainer.style.transform = `translateX(-${current * 100}%)`;
+        updateDots();
+      }
+      function updateDots() {
+        dotsContainer.innerHTML = '';
+        images.forEach((_, i) => {
+          const dot = document.createElement('span');
+          dot.setAttribute('role', 'button');
+          dot.setAttribute('tabindex', '0');
+          dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+          dot.addEventListener('click', () => showSlide(i));
+          dot.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              showSlide(i);
+            }
+          });
+          if (i === current) dot.classList.add('active');
+          dotsContainer.appendChild(dot);
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        updateDots();
+        showSlide(0);
+      });
+    });
+  </script>
+</body>
+</html>

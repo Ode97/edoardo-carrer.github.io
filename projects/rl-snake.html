@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake RL – Dettaglio Tecnico</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      background: #fff;
+    }
+    h1, h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    h3 {
+      font-size: 1.4rem;
+      margin-top: 1.5rem;
+    }
+    p, ul {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    img, video {
+      width: 100%;
+      max-height: 600px;
+      object-fit: cover;
+      margin: 1rem 0;
+      border-radius: 8px;
+    }
+    a {
+      color: #1e90ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover, a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Snake RL – Dettaglio Tecnico</h1>
+    <p><strong>Piattaforma:</strong> Unity in real-time con C#</p>
+    <p><strong>Algoritmo:</strong> Watkins Q(λ) con tracce di eleggibilità</p>
+
+    <h2>Definizione del Problema</h2>
+    <p>Agente che gioca a Snake in una griglia 20×20, muovendo la testa in quattro direzioni per raccogliere frutti e evitando collisioni con la coda o i bordi. Ogni frutto aumenta la lunghezza della coda di 1; l’obiettivo è massimizzare il numero di frutti raccolti per partita.</p>
+
+    <h2>Struttura dell’Agente</h2>
+    <h3>Stato</h3>
+    <p>Lo stato è rappresentato da un vettore di sei interi: [Up, Down, Right, Left, FruitVertical, FruitHorizontal], che codifica ostacoli adiacenti, la direzione di provenienza e la posizione relativa del frutto.</p>
+
+    <h3>Azioni</h3>
+    <ul>
+      <li>Up, Down, Right, Left (escludendo sempre la direzione di provenienza)</li>
+    </ul>
+
+    <h3>Reward</h3>
+    <ul>
+      <li>Collisione o uscita dalla griglia: −5</li>
+      <li>Spostamento verso il frutto: +2</li>
+      <li>Spostamento in direzione diversa: −0.5</li>
+    </ul>
+
+    <h2>Algoritmo</h2>
+    <p>Watkins Q(λ) aggiornato con tracce di eleggibilità in tabella Q (Dictionary). Ogni step calcola:
+      <br>δ = r + γ·maxₐ Q(s′,a) – Q(s,a)
+      <br>Parametri: α (learning rate) = 0.9, γ (fattore di sconto) = 0.2, λ (fattore traccia) = 0.9.
+    </p>
+
+    <h2>Interfaccia Grafica</h2>
+    <img src="../assets/img/rl-snake.png" alt="Screenshot del Reinforcement Learning Snake" loading="lazy">
+    <p>Pannello sinistro con info di episodio, punteggio corrente e record; controlli Start/Stop/Reset e slider velocità. A destra, visualizzazione in tempo reale della Q-table.</p>
+
+    <h2>Risultati</h2>
+    <p>Confronto fra policy:<br>
+      <strong>ε-greedy</strong> (α=0.8, γ=0.2, λ=0.8, ε=0.1) vs <strong>Pursuit</strong> (α=0.8, γ=0.2, λ=0.8) vs <strong>Pursuit2</strong> (α=0.9, γ=0.2, λ=0.9).
+    </p>
+
+    <h2>Considerazioni Finali</h2>
+    <p>Dopo ~250 episodi l’agente evita consistentemente la collisione con coda e bordi. Tuttavia, con lunghezza elevata della coda, la visione limitata a quattro celle provoca loop intorno alla propria coda, evidenziando la necessità di estendere lo stato.</p>
+    <p>Di seguito, i grafici confrontano le performance:</p>
+    <img src="../assets/img/confronto_traccia_real.png" alt="Confronto performance Pursuit con e senza traccia" loading="lazy">
+    <img src="../assets/img/confronto-policy-real.png" alt="Confronto performance tra epsilon-greedy e due varianti di Pursuit" loading="lazy">
+
+    <p><a href="../assets/file/Relazione_UnitySnake.pdf">Documentazione progetto</a></p>
+
+    <p><a href="../index.html">← Torna al Portfolio</a></p>
+  </div>
+</body>
+</html>
